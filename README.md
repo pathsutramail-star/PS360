@@ -1,0 +1,1 @@
+Admin and manager panel merged form, date: 7/5/2026

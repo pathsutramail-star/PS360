@@ -1,0 +1,6 @@
+{
+  "name": "PS360 Panel",
+  "description": "Unified, role-based PS360 workspace: one sign-in that routes Admins to the Admin dashboard and Managers to the Manager panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
