@@ -7,9 +7,9 @@
 // Auth / role model
 // ---------------------------------------------------------------------------
 
-/** The two roles supported by the PS360 panel. The backend decides which
+/** The roles supported by the PS360 panel. The backend decides which
  *  role a logged-in user gets — the frontend only reacts to it. */
-export type Role = 'admin' | 'manager';
+export type Role = 'admin' | 'manager' | 'receptionist';
 
 export interface AuthUser {
   id: string;
@@ -53,7 +53,15 @@ export type View =
   | 'support'
   | 'calendar'
   | 'notifications'
-  | 'profile';
+  | 'profile'
+  // ---- Receptionist-only views ----
+  | 'front-desk'
+  | 'check-in-out'
+  | 'reservations'
+  | 'room-status'
+  | 'guest-directory'
+  | 'guest-requests'
+  | 'shift-handover';
 
 // ---------------------------------------------------------------------------
 // Domain models
@@ -80,4 +88,36 @@ export interface Booking {
   checkOut: string;
   guests: number;
   status: 'Confirmed' | 'Pending' | 'Cancelled' | 'Checked-in' | 'Checked-out';
+}
+
+export interface Guest {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  idType: string;
+  idNumber: string;
+  vip: boolean;
+  notes: string;
+  stayHistory: string[];
+}
+
+export interface GuestRequest {
+  id: string;
+  guestName: string;
+  roomName: string;
+  category: 'Housekeeping' | 'Maintenance' | 'Room Service' | 'Front Desk' | 'Other';
+  description: string;
+  priority: 'Low' | 'Medium' | 'High';
+  status: 'Open' | 'In Progress' | 'Resolved';
+  createdAt: string;
+}
+
+export interface ShiftNote {
+  id: string;
+  author: string;
+  shift: 'Morning' | 'Afternoon' | 'Night';
+  note: string;
+  timestamp: string;
+  acknowledged: boolean;
 }

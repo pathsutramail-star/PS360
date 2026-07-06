@@ -26,7 +26,7 @@ export function Topbar({ user, setSidebarOpen, setCurrentView, onLogout }: Topba
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState(initialNotifications);
   const topbarRef = useRef<HTMLDivElement>(null);
-  const roleLabel = user.role === 'admin' ? 'Administrator' : 'Manager';
+  const roleLabel = user.role === 'admin' ? 'Administrator' : user.role === 'receptionist' ? 'Receptionist' : 'Manager';
   const unreadCount = notifications.filter((notification) => !notification.read).length;
 
   useEffect(() => {

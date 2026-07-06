@@ -10,9 +10,8 @@
  */
 
 import React, { useState } from 'react';
-import { AlertCircle, ArrowRight, Lock, ShieldCheck, UserPlus2, Building2, Briefcase } from 'lucide-react';
+import { AlertCircle, ArrowRight, ChevronDown, Lock, ShieldCheck, UserPlus2 } from 'lucide-react';
 import { Role, Session } from '../../../models/types';
-import { cn } from '../../../utils';
 
 type AuthMode = 'login' | 'create';
 
@@ -127,34 +126,21 @@ export function SignIn({ onLogin, onRegister }: SignInProps) {
 
             {mode === 'create' && (
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">Sign up as</label>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setRole('admin')}
-                    className={cn(
-                      "flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition",
-                      role === 'admin'
-                        ? "border-[#689249] bg-[#f1f7e8] text-[#3f5c2a]"
-                        : "border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100"
-                    )}
+                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="roleSelect">
+                  Sign up as
+                </label>
+                <div className="relative">
+                  <select
+                    id="roleSelect"
+                    value={role}
+                    onChange={(event) => setRole(event.target.value as Role)}
+                    className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-10 text-sm font-semibold text-slate-700 outline-none transition focus:border-[#689249] focus:bg-white"
                   >
-                    <Building2 size={16} />
-                    Admin
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setRole('manager')}
-                    className={cn(
-                      "flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition",
-                      role === 'manager'
-                        ? "border-[#689249] bg-[#f1f7e8] text-[#3f5c2a]"
-                        : "border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100"
-                    )}
-                  >
-                    <Briefcase size={16} />
-                    Manager
-                  </button>
+                    <option value="admin">Admin</option>
+                    <option value="manager">Manager</option>
+                    <option value="receptionist">Receptionist</option>
+                  </select>
+                  <ChevronDown size={16} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
                 </div>
               </div>
             )}

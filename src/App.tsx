@@ -11,6 +11,7 @@ import React from 'react';
 import { SignIn } from './components/views/auth/SignIn';
 import { AdminPanel } from './components/AdminPanel';
 import { ManagerPanel } from './components/ManagerPanel';
+import { ReceptionistPanel } from './components/ReceptionistPanel';
 import { useAuth } from './controllers/useAuth';
 
 export default function App() {
@@ -29,9 +30,13 @@ export default function App() {
     return <SignIn onLogin={login} onRegister={register} />;
   }
 
-  return user.role === 'admin' ? (
-    <AdminPanel user={user} onLogout={logout} />
-  ) : (
-    <ManagerPanel user={user} onLogout={logout} />
-  );
+  if (user.role === 'admin') {
+    return <AdminPanel user={user} onLogout={logout} />;
+  }
+
+  if (user.role === 'receptionist') {
+    return <ReceptionistPanel user={user} onLogout={logout} />;
+  }
+
+  return <ManagerPanel user={user} onLogout={logout} />;
 }

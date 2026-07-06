@@ -17,6 +17,9 @@ import {
   CalendarDays,
   Users,
   Contact,
+  ClipboardList,
+  DoorOpen,
+  Repeat,
   Package,
   CircleDollarSign,
   Megaphone,
@@ -30,7 +33,6 @@ import {
   HelpCircle,
   Calendar,
   Bell,
-  Sparkles,
   UserCircle,
 } from 'lucide-react';
 import { Role, View } from './types';
@@ -45,6 +47,7 @@ export interface NavItem {
 export const DEFAULT_VIEW: Record<Role, View> = {
   admin: 'dashboard',
   manager: 'dashboard',
+  receptionist: 'front-desk',
 };
 
 /** Sidebar links + their order, per role. */
@@ -82,6 +85,19 @@ export const NAV_ITEMS: Record<Role, NavItem[]> = {
     { id: 'notifications', label: 'Notifications', icon: Bell },
     { id: 'profile', label: 'Profile', icon: UserCircle },
   ],
+  receptionist: [
+    { id: 'front-desk', label: 'Front Desk', icon: LayoutDashboard },
+    { id: 'check-in-out', label: 'Check-In / Check-Out', icon: DoorOpen },
+    { id: 'reservations', label: 'Reservations', icon: CalendarDays },
+    { id: 'room-status', label: 'Room Status', icon: BedDouble },
+    { id: 'guest-directory', label: 'Guest Directory', icon: Users },
+    { id: 'guest-requests', label: 'Guest Requests', icon: ClipboardList },
+    { id: 'billing', label: 'Billing & Payments', icon: CreditCard },
+    { id: 'calendar', label: 'Calendar', icon: Calendar },
+    { id: 'shift-handover', label: 'Shift Handover', icon: Repeat },
+    { id: 'notifications', label: 'Notifications', icon: Bell },
+    { id: 'profile', label: 'Profile', icon: UserCircle },
+  ],
 };
 
 /** Every view a role is permitted to render. Used as a safety-net guard in
@@ -90,4 +106,5 @@ export const NAV_ITEMS: Record<Role, NavItem[]> = {
 export const VIEWS_BY_ROLE: Record<Role, View[]> = {
   admin: NAV_ITEMS.admin.map((item) => item.id).concat('ai-copilot'),
   manager: NAV_ITEMS.manager.map((item) => item.id),
+  receptionist: NAV_ITEMS.receptionist.map((item) => item.id),
 };

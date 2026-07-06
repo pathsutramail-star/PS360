@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { X, BedDouble, Users, Building2, Tag, DollarSign } from 'lucide-react';
 import { notify } from '../../../utils';
 
@@ -31,7 +31,7 @@ export function RoomModal({ room, propertyOptions, onClose, onSave }: RoomModalP
     type: room?.type || 'Standard',
     capacity: room?.capacity || 2,
     price: room?.price || '',
-    status: room?.status || 'Available',
+    status: room?.status || 'Vacant Clean',
     amenities: room?.amenities || [],
     imageUrl: room?.imageUrl || ''
   });
@@ -121,9 +121,14 @@ export function RoomModal({ room, propertyOptions, onClose, onSave }: RoomModalP
                   onChange={e => setFormData({...formData, status: e.target.value})}
                   className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#689249]/20 focus:border-[#689249] transition-all text-sm"
                 >
-                  <option value="Available">Available</option>
+                  <option value="Vacant Clean">Vacant Clean</option>
+                  <option value="Vacant Dirty">Vacant Dirty</option>
                   <option value="Occupied">Occupied</option>
+                  <option value="Reserved">Reserved</option>
+                  <option value="Cleaning">Cleaning</option>
+                  <option value="Inspection">Inspection</option>
                   <option value="Maintenance">Maintenance</option>
+                  <option value="Out of Service">Out of Service</option>
                 </select>
               </div>
             </div>
